@@ -12,7 +12,7 @@ class Dictionary:
         return hash(key) % self.capacity
 
     def __setitem__(self, key: Any, value: Any) -> None:
-        if self.size / self.capacity > self.load_factor:
+        if float(self.size / self.capacity) > self.load_factor:
             self._resize()
 
         index = self.__hash_index(key)
@@ -24,7 +24,7 @@ class Dictionary:
         box.append((key, value))
         self.size += 1
 
-    def __getitem__(self, key: Any) -> None:
+    def __getitem__(self, key: Any) -> Any:
         index = hash(key) % self.capacity
         box = self.table[index]
         for (k, v) in box:
