@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Dictionary:
     def __init__(self, capacity: int = 8) -> None:
         self.capacity = capacity
@@ -5,10 +8,10 @@ class Dictionary:
         self.table = [[] for _ in range(self.capacity)]
         self.load_factor = 2 / 3
 
-    def __hash_index(self, key):
+    def __hash_index(self, key: Any) -> int:
         return hash(key) % self.capacity
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key: Any, value: Any) -> None:
         if self.size / self.capacity > self.load_factor:
             self._resize()
 
@@ -21,7 +24,7 @@ class Dictionary:
         box.append((key, value))
         self.size += 1
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> None:
         index = hash(key) % self.capacity
         box = self.table[index]
         for (k, v) in box:
@@ -29,10 +32,10 @@ class Dictionary:
                 return v
         raise KeyError(f"Key {key} not found.")
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.size
 
-    def _resize(self):
+    def _resize(self) -> None:
         old_table = self.table
         self.capacity *= 2
         self.table = [[] for _ in range(self.capacity)]
